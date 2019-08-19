@@ -8,9 +8,15 @@ k apply -f ./tiller/config.yaml
 helm init --service-account tiller
 ```
 
-# Util
+# Required Utilities
+### nginx-ingress
 ```
 reckoner plot util/nginx-ingress/course.yaml
+```
+### cert-manager
+```
+reckoner plot util/cert-manager/course.yaml
+k apply -f ./util/cert-manager/issuer.yaml
 ```
 
 # Apps

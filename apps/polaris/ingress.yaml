@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   annotations:
     kubernetes.io/ingress.class: nginx
+    certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/tls-acme: "true"
   name: polaris
   namespace: polaris
 spec:
@@ -14,3 +16,7 @@ spec:
               serviceName: polaris-dashboard
               servicePort: 8080
             path: /
+  tls:
+  - secretName: tls-prod-cert
+    hosts:
+    - polaris.rocketops.io
