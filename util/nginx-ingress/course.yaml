@@ -1,0 +1,8 @@
+charts:
+  nginx-ingress:
+    namespace: nginx-ingress
+    values:
+      controller:
+        hostNetwork: true
+        service:
+          type: LoadBalancer

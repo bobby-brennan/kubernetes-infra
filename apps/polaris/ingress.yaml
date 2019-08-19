@@ -1,0 +1,16 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  name: polaris
+  namespace: polaris
+spec:
+  rules:
+    - host: polaris.rocketops.io
+      http:
+        paths:
+          - backend:
+              serviceName: polaris-dashboard
+              servicePort: 8080
+            path: /

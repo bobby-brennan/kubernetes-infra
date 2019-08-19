@@ -1,0 +1,7 @@
+charts:
+  polaris:
+    namespace: polaris
+    repository:
+      git: https://github.com/FairwindsOps/charts
+      path: stable
+    chart: polaris
