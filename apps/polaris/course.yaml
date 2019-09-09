@@ -5,3 +5,6 @@ charts:
       git: https://github.com/FairwindsOps/charts
       path: stable
     chart: polaris
+    hooks:
+      post_install:
+      - kubectl apply -f ./ingress.yaml

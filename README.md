@@ -36,17 +36,14 @@ reckoner plot util/cert-manager/course.yaml
 ### polaris
 ```
 reckoner plot apps/polaris/course.yaml
-k apply -f ./apps/polaris/ingress.yaml
 ```
 
 ### rocketchat
 ```
 reckoner plot apps/rocketchat/course.yaml --helm-args --set=mongodb.mongodbPassword=YOUR_PASSWORD,mongodb.mongodbRootPassword=YOUR_PASSWORD
-k apply -f ./apps/rocketchat/ingress.yaml
 ```
 
 ### HackMD
 ```
 reckoner plot apps/hackmd/course.yaml
-k apply -f ./apps/hackmd/ingress.yaml
 ```
