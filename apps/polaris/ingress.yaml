@@ -16,7 +16,15 @@ spec:
               serviceName: polaris-dashboard
               servicePort: 8080
             path: /
+    - host: polaris.rbren.io
+      http:
+        paths:
+          - backend:
+              serviceName: polaris-dashboard
+              servicePort: 8080
+            path: /
   tls:
   - secretName: tls-prod-cert
     hosts:
     - polaris.rocketops.io
+    - polaris.rbren.io
