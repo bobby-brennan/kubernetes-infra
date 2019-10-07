@@ -51,3 +51,9 @@ k apply -f ./apps/rocketchat/ingress.yaml
 reckoner plot apps/hackmd/course.yaml
 k apply -f ./apps/hackmd/ingress.yaml
 ```
+
+### Ghost
+```
+reckoner plot apps/ghost/course.yaml --helm-args --set=ghostPassword=$APP_PASSWORD,mariadb.db.password=$APP_DATABASE_PASSWORD
+k apply -f ./apps/ghost/ingress.yaml
+```

@@ -1,0 +1,15 @@
+charts:
+  ghost:
+    namespace: ghost
+    values:
+      service:
+        type: ClusterIP
+      ghostHost: ghost.rocketops.io
+      persistence:
+        path: /opt/local-path-provisioner
+      mariadb:
+        master:
+          persistence:
+            mountPath: /opt/local-path-provisioner
+        image:
+          debug: true
