@@ -42,7 +42,7 @@ k apply -f ./apps/polaris/ingress.yaml
 
 ### rocketchat
 ```
-reckoner plot apps/rocketchat/course.yaml --helm-args --set=mongodb.mongodbPassword=YOUR_PASSWORD,mongodb.mongodbRootPassword=YOUR_PASSWORD
+reckoner plot apps/rocketchat/course.yaml --helm-args --set=mongodb.mongodbPassword=$YOUR_PASSWORD,mongodb.mongodbRootPassword=$YOUR_PASSWORD
 k apply -f ./apps/rocketchat/ingress.yaml
 ```
 
