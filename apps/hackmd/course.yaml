@@ -1,3 +1,6 @@
 charts:
   hackmd:
     namespace: hackmd
+    hooks:
+      post_install:
+      - kubectl apply -f ./ingress.yaml

@@ -29,7 +29,6 @@ reckoner plot util/nginx-ingress/course.yaml
 ### cert-manager
 ```
 reckoner plot util/cert-manager/course.yaml
-k apply -f ./util/cert-manager/issuer.yaml
 ```
 
 # Apps
@@ -37,7 +36,6 @@ k apply -f ./util/cert-manager/issuer.yaml
 ### polaris
 ```
 reckoner plot apps/polaris/course.yaml
-k apply -f ./apps/polaris/ingress.yaml
 ```
 
 ### rocketchat
@@ -49,7 +47,6 @@ k apply -f ./apps/rocketchat/ingress.yaml
 ### HackMD
 ```
 reckoner plot apps/hackmd/course.yaml
-k apply -f ./apps/hackmd/ingress.yaml
 ```
 
 ### Ghost
