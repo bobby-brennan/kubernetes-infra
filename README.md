@@ -2,9 +2,8 @@
 
 ### Create the cluster
 ```
-sudo kind create cluster --config cluster.yaml
+kind create cluster --config cluster.yaml
 export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
-sudo chown ubuntu $KUBECONFIG
 ```
 
 ### Install Helm
@@ -22,13 +21,9 @@ kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storagec
 ```
 
 # Required Utilities
-### nginx-ingress
+This will install nginx-ingress, cert-manager, and metrics-server
 ```
-reckoner plot util/nginx-ingress/course.yaml
-```
-### cert-manager
-```
-reckoner plot util/cert-manager/course.yaml
+reckoner plot util/course.yaml
 ```
 
 # Apps
