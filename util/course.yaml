@@ -1,7 +1,15 @@
+namespace: default
 repositories:
   jetstack:
     url: https://charts.jetstack.io
 charts:
+  nginx-ingress:
+    namespace: nginx-ingress
+    values:
+      controller:
+        hostNetwork: true
+        service:
+          type: LoadBalancer
   cert-manager:
     hooks:
       pre_install:
@@ -12,9 +20,6 @@ charts:
       - kubectl apply -f ./issuer.yaml
     namespace: cert-manager
     repository: jetstack
-    repo:
-      url: https://charts.jetstack.io
-      name: jetstack/cert-manager
     values:
       ingressShim:
         defaultIssuerName: letsencrypt-staging
@@ -24,3 +29,10 @@ charts:
         requests.memory: 100Mi
         limits.cpu: 50m
         limits.memory: 100Mi
+  metrics-server:
+    namespace: metrics-server
+    values:
+      args:
+      - "--kubelet-insecure-tls"
+      - "--kubelet-preferred-address-types=InternalIP"
+      - "--metric-resolution=30s"

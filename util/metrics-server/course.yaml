@@ -1,9 +1,0 @@
-namespace: default
-charts:
-  metrics-server:
-    namespace: metrics-server
-    values:
-      args:
-      - "--kubelet-insecure-tls"
-      - "--kubelet-preferred-address-types=InternalIP"
-      - "--metric-resolution=30s"
