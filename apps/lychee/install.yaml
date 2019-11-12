@@ -1,0 +1,63 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: lychee
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: lychee
+  namespace: lychee
+  labels:
+    app: lychee
+spec:
+  ports:
+  - name: dashboard
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app: lychee
+  type: ClusterIP
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: lychee
+  namespace: lychee
+  labels:
+    app: lychee
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: lychee
+  template:
+    metadata:
+      labels:
+        app: lychee
+    spec:
+      volumes:
+      - name: data
+        persistentVolumeClaim:
+          claimName: lychee
+      containers:
+      - image: 'kdelfour/lychee-docker'
+        imagePullPolicy: 'Always'
+        name: lychee
+        ports:
+        - containerPort: 80
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1G
+          requests:
+            cpu: 100m
+            memory: 128m
+        volumeMounts:
+        - name: data
+          mountPath: "/data"
+          subPath: "data"
+        - name: data
+          mountPath: "/uploads"
+          subPath: "uploads"
