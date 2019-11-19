@@ -4,7 +4,7 @@ charts:
     values:
       service:
         type: ClusterIP
-      ghostHost: ghost.rocketops.io
+      ghostHost: ghost.rbren.io
       persistence:
         path: /opt/local-path-provisioner
       mariadb:

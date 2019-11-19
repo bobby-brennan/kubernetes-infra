@@ -10,7 +10,7 @@ metadata:
   namespace: lychee
 spec:
   rules:
-    - host: photos.rocketops.io
+    - host: photos.rbren.io
       http:
         paths:
           - backend:
@@ -20,4 +20,4 @@ spec:
   tls:
   - secretName: tls-prod-cert
     hosts:
-    - photos.rocketops.io
+    - photos.rbren.io

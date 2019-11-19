@@ -9,7 +9,7 @@ metadata:
   namespace: hackmd
 spec:
   rules:
-    - host: hackmd.rocketops.io
+    - host: hackmd.rbren.io
       http:
         paths:
           - backend:
@@ -19,4 +19,4 @@ spec:
   tls:
   - secretName: tls-prod-cert
     hosts:
-    - hackmd.rocketops.io
+    - hackmd.rbren.io

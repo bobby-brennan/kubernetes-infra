@@ -9,7 +9,7 @@ metadata:
   namespace: rocketchat
 spec:
   rules:
-    - host: chat.rocketops.io
+    - host: chat.rbren.io
       http:
         paths:
           - backend:
@@ -19,4 +19,4 @@ spec:
   tls:
   - secretName: tls-prod-cert
     hosts:
-    - chat.rocketops.io
+    - chat.rbren.io

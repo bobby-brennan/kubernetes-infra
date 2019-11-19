@@ -9,7 +9,7 @@ metadata:
   namespace: ghost
 spec:
   rules:
-    - host: ghost.rocketops.io
+    - host: ghost.rbren.io
       http:
         paths:
           - backend:
@@ -19,4 +19,4 @@ spec:
   tls:
   - secretName: tls-prod-cert
     hosts:
-    - ghost.rocketops.io
+    - ghost.rbren.io
