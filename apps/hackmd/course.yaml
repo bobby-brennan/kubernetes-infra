@@ -4,4 +4,8 @@ charts:
     hooks:
       post_install:
       - kubectl apply -f ./ingress.yaml
+      - sleep 30
       - ../../scripts/retain.sh
+    values:
+      postgresql:
+        postgresPassword: $HACKMD_POSTGRES_PASSWORD

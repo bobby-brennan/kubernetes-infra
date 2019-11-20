@@ -18,9 +18,10 @@ while read -r line; do
   fi
 
   name=$(get_string "${line}" 6)
+  status=$(get_string "${line}" 5)
   name=${name/\//.}
   id=$(get_string "${line}" 1)
-  if [[ $name == $1 ]]; then
+  if [[ $name == $1 ]] && [[ $status == "Bound" ]]; then
     echo "found $id"
     sudo mv ~/kind-disk/$id ~/kind-disk/backup-$id || true
     sudo mv ./restore ~/kind-disk/$id
