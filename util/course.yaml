@@ -4,6 +4,7 @@ repositories:
     url: https://charts.jetstack.io
 charts:
   nginx-ingress:
+    version: 1.25.0
     namespace: nginx-ingress
     values:
       controller:
@@ -11,11 +12,12 @@ charts:
         service:
           type: LoadBalancer
   cert-manager:
+    version: v0.6.7
+    namespace: cert-manager
+    repository: jetstack
     hooks:
       pre_install:
       - kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/deploy/manifests/00-crds.yaml
-    namespace: cert-manager
-    repository: jetstack
     values:
       ingressShim:
         defaultIssuerName: letsencrypt-prod
@@ -26,6 +28,7 @@ charts:
         limits.cpu: 50m
         limits.memory: 100Mi
   metrics-server:
+    version: 2.8.8
     namespace: metrics-server
     values:
       args:
