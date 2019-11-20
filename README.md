@@ -89,26 +89,34 @@ kubectl scale deployment hackmd --replicas=1
 
 ## Install Apps
 
-Follow the instructions below to install one of the applications
+Follow the instructions below to install one of the applications.
+
+### HackMD
+```
+export HACKMD_POSTGRESS_PASSWORD=foobar
+export HACKMD_HOST=hackmd.yourdomain.com
+reckoner plot apps/hackmd/course.yaml
+```
+
+If you want to make sure your data doesn't get deleted if you uninstall HackMD,
+be sure to run:
+```
+./scripts/retain.sh
+```
+
+### Lychee
+```
+k apply -f ./apps/lychee/
+```
 
 ### rocketchat
 ```
 reckoner plot apps/rocketchat/course.yaml --helm-args --set=mongodb.mongodbPassword=$ROCKETCHAT_PASSWORD,mongodb.mongodbRootPassword=$ROCKETCHAT_PASSWORD
 ```
 
-### HackMD
-```
-reckoner plot apps/hackmd/course.yaml --helm-args --set=postgresql.postgresPassword=$HACKMD_POSTGRES_PASSWORD
-```
-
 ### Ghost
 ```
 reckoner plot apps/ghost/course.yaml --helm-args --set=ghostPassword=$GHOST_PASSWORD,mariadb.db.password=$GHOST_DATABASE_PASSWORD
-```
-
-### Lychee
-```
-k apply -f ./apps/lychee/
 ```
 
 ### polaris
