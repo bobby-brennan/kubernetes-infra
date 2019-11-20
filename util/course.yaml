@@ -22,7 +22,7 @@ charts:
     repository: jetstack
     values:
       ingressShim:
-        defaultIssuerName: letsencrypt-staging
+        defaultIssuerName: letsencrypt-prod
         defaultIssuerKind: ClusterIssuer
       resources:
         requests.cpu: 50m
