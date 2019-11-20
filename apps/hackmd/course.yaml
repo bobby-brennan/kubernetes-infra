@@ -4,3 +4,4 @@ charts:
     hooks:
       post_install:
       - kubectl apply -f ./ingress.yaml
+      - ../../scripts/retain.sh
