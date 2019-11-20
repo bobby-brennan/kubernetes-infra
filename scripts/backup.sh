@@ -26,5 +26,5 @@ kubectl get pv | while read line ; do
 done
 
 cd $cur_directory
-/usr/local/bin/aws2 s3 sync ~/k8s-backup/ s3://bb-kubernetes-backups --profile k8s-upload-backup
+/usr/local/bin/aws2 s3 sync ~/k8s-backup/ s3://$S3_BACKUP_BUCKET --profile k8s-upload-backup
 echo -e '\n\n'"Created backup snapshot $now"'\n\n'
