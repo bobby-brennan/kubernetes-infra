@@ -1,5 +1,16 @@
 # Local cluster
 
+## Dependencies
+```
+curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.6.0/kind-$(uname)-amd64
+chmod +x ./kind
+sudo mv ./kind /usr/local/bin/
+
+pip install reckoner
+```
+
+## Start
+
 ### Create the cluster
 ```
 kind create cluster --config cluster.yaml

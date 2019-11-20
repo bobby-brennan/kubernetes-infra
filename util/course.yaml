@@ -13,7 +13,7 @@ charts:
   cert-manager:
     hooks:
       pre_install:
-      - kubectl apply -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.9/deploy/manifests/00-crds.yaml
+      - kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/deploy/manifests/00-crds.yaml
       post_install:
       - echo "waiting to add issuer..."
       - sleep 30

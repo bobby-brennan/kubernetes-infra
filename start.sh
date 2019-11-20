@@ -2,7 +2,6 @@
 set -e
 
 kind create cluster --config cluster.yaml
-export KUBECONFIG="$(kind get kubeconfig-path --name="kind")"
 
 export TILLER_NAMESPACE=tiller
 kubectl apply -f ./tiller/config.yaml
