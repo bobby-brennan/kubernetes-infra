@@ -6,7 +6,26 @@ It includes out-of-the-box configuration for a few apps:
 * a Photo sharing application (Lychee)
 * a chatroom (RocketChat)
 
-#### How to use it
+#### Why?
+Kubernetes is typically thought of as a way to deploy highly scalable, resilient
+applications. For hosting personal projects, a blog, etc, it could be argued that
+Kubernetes is overkill, especially given how complex Kubernetes is.
+
+But Kubernetes is good for more than just scalability and resilience. The ecosystem that
+has grown up around Kubernetes has made it an ideal way to create and manage deployments,
+both of your own projects, and of third-party software. Kubernetes is quickly becoming
+the de facto computing platform, supported by all major cloud vendors. And nearly every
+open source project comes with a Dockerfile, if not a Helm chart, making installation a
+breeze.
+
+Here are a few benefits that come with using Kubernetes for a personal cluster:
+* Any dockerized application can be easily installed
+* CPU and memory resources can be tightly controlled
+* High degree of separation between different applications
+* Infrastructure-as-code makes deployments highly reproducible and easy to reason about
+* Self-healing infrastructure helps reduce operational costs
+
+#### How to use this repository
 Setup takes a few steps:
 * Provision a new machine (e.g. an EC2 instance)
 * Point your domain to the machine
@@ -50,8 +69,10 @@ helm upgrade --install cert-issuer ./charts/cert-issuer --set email=you@example.
 ````
 
 ## Setup Backups
+> TODO: add terraform for managing the S3 Bucket
+
 You're going to be storing your application data in `~/kind-disk`. It's easy for this data
-to get suddenly deleted (it's being managed by the cluster). You should _definitely_ back this
+to get suddenly deleted, as it's being managed by the cluster. You should _definitely_ back this
 up somewhere.
 
 This repo comes with two scripts: `./scripts/backup.sh` and `./scripts/restore.sh`. These
