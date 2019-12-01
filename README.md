@@ -58,6 +58,13 @@ rm -rf linux-amd64
 pip install reckoner
 ```
 
+Finally, we'll use the AWS CLI v2 to manage backups:
+```
+curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
+
 ## Create the Cluster
 > If you want to start again from scratch, you can run `kind delete cluster`
 > and run these instructions again
