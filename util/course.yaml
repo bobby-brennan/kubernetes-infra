@@ -19,7 +19,7 @@ charts:
       pre_install:
       - kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/deploy/manifests/00-crds.yaml
       post_install:
-      - sleep 30 # wait for apiservice to become available
+      - sleep 60 # wait for apiservice to become available
     values:
       ingressShim:
         defaultIssuerName: letsencrypt-prod
