@@ -2,14 +2,31 @@ charts:
   ghost:
     namespace: ghost
     values:
+      ghostUsername: $GHOST_USERNAME
+      ghostEmail: $GHOST_USERNAME
+      ghostPassword: $GHOST_PASSWORD
       service:
         type: ClusterIP
-      ghostHost: ghost.rbren.io
+      ghostHost: $GHOST_HOST
       persistence:
         path: /opt/local-path-provisioner
       mariadb:
+        db:
+          password: $GHOST_PASSWORD
         master:
           persistence:
             mountPath: /opt/local-path-provisioner
         image:
           debug: true
+      ingress:
+        enabled: true
+        hosts:
+          - name: $GHOST_HOST
+            tls: true
+            tlsSecret: tls-prod-cert
+    hooks:
+      post_install:
+        - kubectl annotate ing ghost -n ghost "kubernetes.io/ingress.class=nginx"
+        - kubectl annotate ing ghost -n ghost "certmanager.k8s.io/cluster-issuer=letsencrypt-prod"
+        - kubectl annotate ing ghost -n ghost "kubernetes.io/tls-acme=true"
+        - ../../scripts/retain.sh

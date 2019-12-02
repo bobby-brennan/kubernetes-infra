@@ -121,6 +121,16 @@ Use your crontab to automatically back up every day
 crontab -l | { cat; echo "0 0 * * * S3_BACKUP_BUCKET=your-bucket-name /path/to/this/dir/scripts/backup.sh"; } | crontab -
 ```
 
+### Persist your data
+When an app is uninstalled, it will delete the corresponding data by default.
+To change this, every time you install an app, you should run
+```
+./scripts/retain.sh
+```
+which will set all PVs to `RETAIN` mode.
+
+This is done automatically for HackMD and Ghost.
+
 ## Install Apps
 
 Follow the instructions below to install one of the applications.
@@ -132,10 +142,12 @@ export HACKMD_HOST=hackmd.yourdomain.com
 reckoner plot apps/hackmd/course.yaml
 ```
 
-If you want to make sure your data doesn't get deleted if you uninstall HackMD,
-be sure to run:
+### Ghost
 ```
-./scripts/retain.sh
+export GHOST_USERNAME=foo@bar.com
+export GHOST_PASSWORD=foo
+export GHOST_HOST=blog.yourdomain.com
+reckoner plot apps/ghost/course.yaml
 ```
 
 ### Lychee
@@ -146,11 +158,6 @@ k apply -f ./apps/lychee/
 ### rocketchat
 ```
 reckoner plot apps/rocketchat/course.yaml --helm-args --set=mongodb.mongodbPassword=$ROCKETCHAT_PASSWORD,mongodb.mongodbRootPassword=$ROCKETCHAT_PASSWORD
-```
-
-### Ghost
-```
-reckoner plot apps/ghost/course.yaml --helm-args --set=ghostPassword=$GHOST_PASSWORD,mariadb.db.password=$GHOST_DATABASE_PASSWORD
 ```
 
 ### polaris

@@ -17,3 +17,4 @@ charts:
         - kubectl annotate ing hackmd -n hackmd "kubernetes.io/ingress.class=nginx"
         - kubectl annotate ing hackmd -n hackmd "certmanager.k8s.io/cluster-issuer=letsencrypt-prod"
         - kubectl annotate ing hackmd -n hackmd "kubernetes.io/tls-acme=true"
+        - ../../scripts/retain.sh
