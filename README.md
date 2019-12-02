@@ -115,6 +115,12 @@ kubectl scale deployment hackmd-postgresql --replicas=1
 kubectl scale deployment hackmd --replicas=1
 ```
 
+### Backup on a schedule
+Use your crontab to automatically back up every day
+```
+crontab -l | { cat; echo "0 0 * * * S3_BACKUP_BUCKET=your-bucket-name /path/to/this/dir/scripts/backup.sh"; } | crontab -
+```
+
 ## Install Apps
 
 Follow the instructions below to install one of the applications.
