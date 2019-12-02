@@ -23,10 +23,11 @@ charts:
         hosts:
           - name: $GHOST_HOST
             tls: true
-            tlsSecret: tls-prod-cert
+            tlsSecret: tls-prod-cert-ghost
+        annotations:
+          kubernetes\.io\/ingress\.class: nginx
+          certmanager\.k8s\.io\/cluster-issuer: letsencrypt-prod
+          kubernetes\.io\/tls-acme: "true"
     hooks:
       post_install:
-        - kubectl annotate ing ghost -n ghost "kubernetes.io/ingress.class=nginx"
-        - kubectl annotate ing ghost -n ghost "certmanager.k8s.io/cluster-issuer=letsencrypt-prod"
-        - kubectl annotate ing ghost -n ghost "kubernetes.io/tls-acme=true"
         - ../../scripts/retain.sh
