@@ -49,7 +49,7 @@ sudo mv ./kind /usr/local/bin/
 
 We also use [Helm](https://github.com/helm/helm) and [Reckoner](https://github.com/FairwindsOps/reckoner) to manage applications
 ```
-curl -L "https://get.helm.sh/helm-v2.16.1-linux-amd64.tar.gz" > helm.tar.gz
+curl -L "https://get.helm.sh/helm-v2.14.3-linux-amd64.tar.gz" > helm.tar.gz
 tar -xvf helm.tar.gz
 sudo mv linux-amd64/helm /usr/local/bin/
 sudo mv linux-amd64/tiller /usr/local/bin/
