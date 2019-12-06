@@ -15,7 +15,7 @@ sleep 60
 
 reckoner plot util/course.yaml
 
-sleep 60
+sleep 30
 
 echo -e "\n\n"
 echo "Your cluster is ready!"
