@@ -1,6 +1,7 @@
 charts:
   hackmd:
     namespace: hackmd
+    version: "1.2.1"
     values:
       postgresql:
         postgresPassword: $HACKMD_POSTGRES_PASSWORD
