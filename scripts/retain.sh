@@ -9,6 +9,7 @@ while read -r line; do
   if [ $idx -eq 1 ]; then
     continue
   fi
+  echo "patching $id"
 
   id=$(get_string "${line}" 1)
   kubectl patch pv $id -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'

@@ -6,9 +6,11 @@ source `dirname "$0"`/util.sh
 echo "Restoring $1 from snapshot at $2"
 rm -rf restore
 mkdir restore
-aws2 s3 cp s3://$S3_BACKUP_BUCKET/$2/$1.zip ./restore/ --profile k8s-upload-backup
-cd restore ; unzip -q $1.zip ; cd ..
-rm restore/$1.zip
+aws2 s3 cp s3://$S3_BACKUP_BUCKET/$2/$1.tar.gz ./restore/ --profile k8s-upload-backup
+cd restore
+sudo tar -pxvf $1.tar.gz
+cd ..
+rm restore/$1.tar.gz
 
 idx=0
 while read -r line; do

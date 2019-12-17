@@ -22,7 +22,7 @@ kubectl get pv | while read line ; do
   id=$(get_string "${line}" 1)
 
   cd ~/kind-disk/$id
-  sudo zip -r ~/k8s-backup/$now/$name.zip . -i \*
+  sudo tar -cpvzf ~/k8s-backup/$now/$name.tar.gz .
 done
 
 cd $cur_directory
