@@ -13,6 +13,8 @@ charts:
       mariadb:
         db:
           password: $GHOST_PASSWORD
+        rootUser:
+          password: $GHOST_PASSWORD
         image:
           debug: true
       ingress:
@@ -28,4 +30,5 @@ charts:
           nginx\.ingress\.kubernetes\.io\/proxy-body-size: 5m
     hooks:
       post_install:
+        - sleep 10
         - ../../scripts/retain.sh
