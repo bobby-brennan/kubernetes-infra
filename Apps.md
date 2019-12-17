@@ -1,7 +1,10 @@
 This is a list of open source consumer-grade applications that could be added to this repo
 
 ## Community
-Mastodon - https://github.com/Ladicle/mastodon-chart
+* Mastodon - https://github.com/Ladicle/mastodon-chart
+
+## Without Helm Charts
+* https://selfhostedsource.tech/self-hosted/all
 
 ## Helm Hub
 * Factorio - a game https://hub.helm.sh/charts/stable/factorio
