@@ -13,9 +13,6 @@ charts:
       mariadb:
         db:
           password: $GHOST_PASSWORD
-        master:
-          persistence:
-            mountPath: /opt/local-path-provisioner
         image:
           debug: true
       ingress:
