@@ -1,5 +1,5 @@
 #! /bin/bash
-set -e
+set -eo pipefail
 
 source `dirname "$0"`/util.sh
 
