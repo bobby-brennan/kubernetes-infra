@@ -61,3 +61,6 @@ spec:
         - name: data
           mountPath: "/uploads"
           subPath: "uploads"
+        - name: data
+          mountPath: "/mysql"
+          subPath: "mysql"
