@@ -49,13 +49,12 @@ sudo mv ./kind /usr/local/bin/
 
 We also use [Helm](https://github.com/helm/helm) and [Reckoner](https://github.com/FairwindsOps/reckoner) to manage applications
 ```
-curl -L "https://get.helm.sh/helm-v2.14.3-linux-amd64.tar.gz" > helm.tar.gz
+curl -L "https://get.helm.sh/helm-v3.0.2-linux-amd64.tar.gz" > helm3.tar.gz
 tar -xvf helm.tar.gz
 sudo mv linux-amd64/helm /usr/local/bin/
-sudo mv linux-amd64/tiller /usr/local/bin/
 rm -rf linux-amd64
 
-pip install reckoner
+pip3 install reckoner
 ```
 
 Finally, we'll use the AWS CLI v2 to manage backups:
