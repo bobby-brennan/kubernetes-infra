@@ -12,5 +12,5 @@ while read -r line; do
   id=$(get_string "${line}" 1)
   echo "patching $id"
   kubectl patch pv $id -p '{"spec":{"persistentVolumeReclaimPolicy":"Retain"}}'
-done < <(kubectl get pv)
+done < <(kubectl get pv -A)
 
