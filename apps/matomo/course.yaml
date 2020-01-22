@@ -1,0 +1,27 @@
+charts:
+  matomo:
+    namespace: matomo
+    repository:
+      git: https://github.com/rbren/matomo-chart
+    values:
+      matomoUsername: $MATOMO_USERNAME
+      matomoPassword: $MATOMO_PASSWORD
+      matomoEmail: $MATOMO_EMAIL
+      ingress:
+        enabled: true
+        hosts:
+        - $MATOMO_HOST
+        tls:
+        - secretName: tls-prod-cert-matomo
+          hosts:
+          - $MATOMO_HOST
+        annotations:
+          kubernetes\.io\/ingress\.class: nginx
+          certmanager\.k8s\.io\/cluster-issuer: letsencrypt-prod
+          kubernetes\.io\/tls-acme: "true"
+      mariadb:
+        db:
+          password: $MATOMO_PASSWORD
+    hooks:
+      post_install:
+        - ../../scripts/retain.sh

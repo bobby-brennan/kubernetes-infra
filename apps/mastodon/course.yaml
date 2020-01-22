@@ -1,0 +1,27 @@
+charts:
+  mastodon:
+    namespace: mastodon
+    repository:
+      git: https://github.com/rbren/mastodon-helm
+    version: "0.1.0"
+    values:
+      postgresql:
+        postgresPassword: $MASTODON_POSTGRES_PASSWORD
+      redis:
+        global:
+          redis:
+            password: $MASTODON_POSTGRES_PASSWORD
+      ingress:
+        enabled: true
+        hosts:
+          - name: $MASTODON_HOST
+            tls: true
+            tlsSecret: tls-prod-cert-mastodon
+        annotations:
+          kubernetes\.io\/ingress\.class: nginx
+          certmanager\.k8s\.io\/cluster-issuer: letsencrypt-prod
+          kubernetes\.io\/tls-acme: "true"
+          nginx\.ingress\.kubernetes\.io\/proxy-body-size: 5m
+    hooks:
+      post_install:
+        - ../../scripts/retain.sh

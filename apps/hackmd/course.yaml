@@ -1,3 +1,4 @@
+namespace: hackmd
 charts:
   hackmd:
     namespace: hackmd
