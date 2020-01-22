@@ -70,7 +70,7 @@ sudo ./aws/install
 
 To get up and running with a cluster, run:
 ```
-./start.sh
+./scripts/create-kind.sh
 helm upgrade --install cert-issuer ./charts/cert-issuer --set email=you@example.com
 ````
 

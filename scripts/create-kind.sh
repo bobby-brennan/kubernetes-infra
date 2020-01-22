@@ -1,5 +1,5 @@
-#!/bin/bash
-set -e
+#! /bin/bash
+set -eo pipefail
 
 kind create cluster --config cluster.yaml
 
@@ -9,10 +9,6 @@ kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storagec
 
 sleep 60
 
-reckoner plot util/course.yaml
+./setup-cluster.sh
 
-sleep 30
 
-echo -e "\n\n"
-echo "Your cluster is ready!"
-echo -e "To finish, you should run:\nhelm upgrade --install cert-issuer ./charts/cert-issuer --set email=you@example.com"
