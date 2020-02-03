@@ -9,6 +9,6 @@ kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storagec
 
 sleep 60
 
-./setup-cluster.sh
+./scripts/setup-cluster.sh
 
 
