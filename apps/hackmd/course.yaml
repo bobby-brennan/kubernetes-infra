@@ -1,8 +1,12 @@
 namespace: hackmd
+repositories:
+  rbrenfork:
+    git: git@github.com:rbren/charts.git
+    path: stable
 charts:
   hackmd:
+    repository: rbrenfork
     namespace: hackmd
-    version: "1.2.3"
     values:
       postgresql:
         postgresPassword: $HACKMD_POSTGRES_PASSWORD
