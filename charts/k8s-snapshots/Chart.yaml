@@ -1,0 +1,7 @@
+apiVersion: v1
+description: A Helm chart to add k8s-snapshots
+name: k8s-snapshots
+appVersion: 2.0.0
+version: 0.0.1
+maintainers:
+  - name: rbren

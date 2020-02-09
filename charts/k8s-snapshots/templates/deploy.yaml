@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: k8s-snapshots
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: k8s-snapshots
+  template:
+    metadata:
+      labels:
+        app: k8s-snapshots
+    spec:
+      serviceAccountName: k8s-snapshots
+      containers:
+      - name: k8s-snapshots
+        image: "elsdoerfer/k8s-snapshots@sha256:5fd75a08f379107a65724c8bbe269fb9fc9de474ce1b5c39be4d25fdf7acbd94"
+        env:
+        - name: DIGITALOCEAN_ACCESS_TOKEN
+          valueFrom:
+            secretKeyRef:
+              name: k8s-snapshots-secrets
+              key: digitalocean_access_token
