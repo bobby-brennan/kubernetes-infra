@@ -12,6 +12,7 @@ This is a list of open source consumer-grade applications that could be added to
 * HackMD - a markdown editor https://hub.helm.sh/charts/stable/hackmd
 * Hubot - slack chatbot https://hub.helm.sh/charts/stable/hubot
 * Jupyter - python notebooks https://hub.helm.sh/charts/cern/jupyterhub
+  * also https://github.com/jupyterhub/helm-chart
 * mediawiki - wiki https://hub.helm.sh/charts/bitnami/mediawiki
 * metabase - dataviz https://hub.helm.sh/charts/stable/metabase
 * moodle - learning platform https://hub.helm.sh/charts/bitnami/moodle
