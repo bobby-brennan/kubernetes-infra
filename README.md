@@ -65,6 +65,16 @@ sudo ./aws/install
 ```
 
 ## Create the Cluster
+
+### DigitalOcean
+* Create cluster using DO UI
+* Download KUBECONFIG from DO UI and place it in .kubeconfig
+* run `./scripts/setup-cluster.sh`
+* find the new load balancer created in the DO UI
+* set that IP address in your DNS configuration
+
+
+### KIND
 > If you want to start again from scratch, you can run `kind delete cluster`
 > and run these instructions again
 
