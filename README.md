@@ -84,7 +84,8 @@ To get up and running with a cluster, run:
 helm upgrade --install cert-issuer ./charts/cert-issuer --set email=you@example.com
 ````
 
-## Automated Cloud Volume Backups
+## Backups
+### Automated Cloud Volume Backups
 [k8s-snapshots](https://github.com/miracle2k/k8s-snapshots) can be used with
 certain cloud providers to create automated backups.
 
@@ -96,7 +97,18 @@ helm upgrade --install k8s-snapshots -n k8s-snapshots ./charts/k8s-snapshots/ \
 The script `./scripts/retain.sh` will annotate your PVCs with a schedule to keep 14 days worth
 of daily backups.
 
-## Local Backups
+#### Restoring
+> This will definitely cause downtime. PRs accepted
+
+To restore a volume on Digital Ocean:
+* take a snapshot of the existing volume
+* delete the existing volume
+* create a volume from the snapshot you want to use
+  * use the PVC ID for the name (should be the same name as the volume you deleted)
+  * attach it to the same node
+* power cycle the node
+
+### Local Backups
 > TODO: add terraform for managing the S3 Bucket
 
 You're going to be storing your application data in `~/kind-disk`. It's easy for this data
