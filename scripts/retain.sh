@@ -23,5 +23,5 @@ while read -r line; do
   ns=$(get_string "${line}" 1)
   id=$(get_string "${line}" 2)
   echo "patching pvc $ns/$id"
-  kubectl patch pvc $id -n $ns -p '{"metadata": {"annotations": {"backup.kubernetes.io/deltas": "P1D P14D"}}}'
+  kubectl patch pvc $id -n $ns -p '{"metadata": {"annotations": {"backup.kubernetes.io/deltas": "P1D P3D P7D P30D"}}}'
 done < <(kubectl get pvc -A)
