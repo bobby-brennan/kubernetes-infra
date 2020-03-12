@@ -1,5 +1,5 @@
 # Personal Kubernetes Clusters
-I use this repository to self-host a single-machine Kubernetes cluster.
+I use this repository to host my own Kubernetes infrastructure.
 It includes out-of-the-box configuration for a few apps:
 * a Markdown editor (HackMD)
 * a blogging platform (Ghost)
@@ -23,23 +23,34 @@ Here are a few benefits that come with using Kubernetes for a personal cluster:
 * CPU and memory resources can be tightly controlled
 * High degree of separation between different applications
 * Infrastructure-as-code makes deployments highly reproducible and easy to reason about
-* Self-healing infrastructure helps reduce operational costs
+* Self-healing infrastructure reduces operational toil
 
 #### How to use this repository
+I've used two methods for hosting a cluster:
+* **KIND running on a single machine**. This is good for prototyping, but it was painful long-term. 
+* **A managed cluster on DigitalOcean**. This has been a much better experience. Unfortunately restoring data from backups is currently difficult/incomplete.
+
 Setup takes a few steps:
-* Provision a new machine (e.g. an EC2 instance)
-* Point your domain to the machine
-* Start the KIND cluster
+* For a DigitalOcean or other managed cluster
+  * Provision the cluster
+  * Install the utilities
+  * Point your domain to the managed load balancer
+* For single-machine clusters w/ KIND:
+  * Provision a new machine (e.g. an EC2 instance)
+  * Point your domain to the machine
+  * Start the KIND cluster
 * Set up automated backups
 * Install apps!
 
 #### Requirements
-On EC2, a `t2.medium` is recommended, but it seems to work on a `t2.small` as well, which run for ~$30/month and ~$15/month respectively.
+For a single machine on EC2, a `t2.medium` is recommended, but it seems to work on a `t2.small` as well, which run for ~$30/month and ~$15/month respectively.
+
+On DigitalOcean, a cluster with two $10/mo nodes seems to work well.
 
 This has been tested using Ubuntu 18.04, but other operating systems should work
 
 #### Dependencies
-We use KIND (Kubernetes in Docker) to run the cluster. You'll need to have
+If you plan on using a single-machine cluster, you'll need KIND (Kubernetes in Docker) to run the cluster. You'll need to have
 [Docker installed](https://phoenixnap.com/kb/how-to-install-docker-on-ubuntu-18-04)
 ```
 curl -Lo ./kind https://github.com/kubernetes-sigs/kind/releases/download/v0.6.0/kind-$(uname)-amd64
@@ -57,19 +68,13 @@ rm -rf linux-amd64
 pip3 install reckoner
 ```
 
-Finally, we'll use the AWS CLI v2 to manage backups:
-```
-curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
-unzip awscliv2.zip
-sudo ./aws/install
-```
-
 ## Create the Cluster
 
 ### DigitalOcean
 * Create cluster using DO UI
 * Download KUBECONFIG from DO UI and place it in .kubeconfig
 * run `./scripts/setup-cluster.sh`
+* run `helm upgrade --install cert-issuer ./charts/cert-issuer --set email=you@example.com`
 * find the new load balancer created in the DO UI
 * set that IP address in your DNS configuration
 
@@ -108,8 +113,15 @@ To restore a volume on Digital Ocean:
   * attach it to the same node
 * power cycle the node
 
-### Local Backups
+### KIND Backups
 > TODO: add terraform for managing the S3 Bucket
+
+We use AWS CLI v2 to manage backups:
+```
+curl "https://d1vvhvl2y92vvt.cloudfront.net/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+unzip awscliv2.zip
+sudo ./aws/install
+```
 
 You're going to be storing your application data in `~/kind-disk`. It's easy for this data
 to get suddenly deleted, as it's being managed by the cluster. You should _definitely_ back this
@@ -118,7 +130,7 @@ up somewhere.
 This repo comes with two scripts: `./scripts/backup.sh` and `./scripts/restore.sh`. These
 will store your backups in an Amazon S3 bucket.
 
-### Set up the bucket
+#### Set up the bucket
 Head over to AWS and create a new S3 bucket. You'll also want to create an IAM profile
 to use for interacting with the bucket. See [iam-profile-for-backups.json](iam-profile-for-backups.json)
 for a good minimal profile, but be sure to replace `$S3_BACKUP_BUCKET` with your bucket name.
@@ -148,7 +160,7 @@ kubectl scale deployment hackmd-postgresql --replicas=1
 kubectl scale deployment hackmd --replicas=1
 ```
 
-### Backup on a schedule
+#### Backup on a schedule
 Use your crontab to automatically back up every day
 ```
 crontab -l | { cat; echo "0 0 * * * S3_BACKUP_BUCKET=your-bucket-name /path/to/this/dir/scripts/backup.sh"; } | crontab -
@@ -160,7 +172,7 @@ To change this, every time you install an app, you should run
 ```
 ./scripts/retain.sh
 ```
-which will set all PVs to `RETAIN` mode.
+which will set all PVs to `RETAIN` mode. It will also add `k8s-snapshots` annotations if you're using cloud backups.
 
 This is done automatically for HackMD and Ghost.
 
