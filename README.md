@@ -43,11 +43,9 @@ Setup takes a few steps:
 * Install apps!
 
 #### Requirements
-For a single machine on EC2, a `t2.medium` is recommended, but it seems to work on a `t2.small` as well, which run for ~$30/month and ~$15/month respectively.
+For a single machine on EC2, a `t2.medium` is recommended, but it seems to work on a `t2.small` as well, which run for ~$30/month and ~$15/month respectively. This has been tested using Ubuntu 18.04, but other operating systems should work
 
 On DigitalOcean, a cluster with two $10/mo nodes seems to work well.
-
-This has been tested using Ubuntu 18.04, but other operating systems should work
 
 #### Dependencies
 If you plan on using a single-machine cluster, you'll need KIND (Kubernetes in Docker) to run the cluster. You'll need to have
