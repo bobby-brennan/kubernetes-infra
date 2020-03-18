@@ -36,7 +36,7 @@ rm -rf uploads
 mkdir postgresql
 tar -xvf ~/k8s-backup/$TIMESTAMP/hackmd.hackmd-postgresql.tar.gz -C ./postgresql
 k cp postgresql hackmd/hackmd-postgresql-0:/bitnami/
-rm -rf hackmd
+rm -rf postgresql
 
 k scale deploy --all --replicas=0
 k scale statefulset --all --replicas=0
