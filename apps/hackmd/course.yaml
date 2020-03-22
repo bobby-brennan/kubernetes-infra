@@ -1,4 +1,4 @@
-namespace: hackmd
+namespace: notepad
 repositories:
   rbrenfork:
     git: git@github.com:rbren/charts.git
@@ -6,10 +6,14 @@ repositories:
 charts:
   hackmd:
     repository: rbrenfork
-    namespace: hackmd
+    namespace: notepad
     values:
       postgresql:
-        postgresPassword: $HACKMD_POSTGRES_PASSWORD
+        postgresqlPassword: $HACKMD_POSTGRES_PASSWORD
+        #persistence:
+          #existingClaim: restore-hackmd-postgresql
+      #persistence:
+        #existingClaim: restore-hackmd
       ingress:
         enabled: true
         hosts:
@@ -20,7 +24,7 @@ charts:
               - $HACKMD_HOST
     hooks:
       post_install:
-        - kubectl annotate ing hackmd -n hackmd "kubernetes.io/ingress.class=nginx"
-        - kubectl annotate ing hackmd -n hackmd "certmanager.k8s.io/cluster-issuer=letsencrypt-prod"
-        - kubectl annotate ing hackmd -n hackmd "kubernetes.io/tls-acme=true"
+        - kubectl annotate ing hackmd -n notepad --overwrite "kubernetes.io/ingress.class=nginx"
+        - kubectl annotate ing hackmd -n notepad --overwrite "certmanager.k8s.io/cluster-issuer=letsencrypt-prod"
+        - kubectl annotate ing hackmd -n notepad --overwrite "kubernetes.io/tls-acme=true"
         - ../../scripts/retain.sh

@@ -1,5 +1,18 @@
-## Working on 1.16
+## Backup and Restore
 
+```bash
+reckoner plot ./apps/hackmd/course.yaml
+# make some changes in HackMD UI
+k apply -f ./apps/hackmd/backup.yaml
+# make more changes in HackMD UI
+k apply -f ./apps/hackmd/restore.yaml
+helm delete hackmd
+# uncomment persistence lines in course.yaml
+reckoner plot ./apps/hackmd/course.yaml
+```
+
+## Working on 1.16
+> This does not appear to be the case any longer...working in namespace notepad
 The hackmd chart doesn't work out of the box on 1.16. You'll need to
 
 * Copy `values` out of `course.yaml`
