@@ -1,0 +1,42 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: stock-screener
+---
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: stock-screener-refresh
+  namespace: stock-screener
+spec:
+  schedule: "0 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: OnFailure
+          containers:
+          - name: hello
+            image: node:13.10
+            command: ["bash"]
+            args:
+            - -c
+            - |
+              git config --global user.email "bobby.brennan@gmail.com"
+              git config --global user.name "Stock Screener Bot"
+
+              git clone https://$GITHUB_TOKEN@github.com/rbren/stock-screener
+              cd stock-screener
+              npm install
+              node refresh.js
+              git add .
+              git commit -m "automated data refresh"
+              git push
+            env:
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: github-token
+                  key: github-token
+
+
