@@ -13,6 +13,7 @@ reckoner plot ./apps/hackmd/course.yaml
 
 ## Working on 1.16
 > This does not appear to be the case any longer...working in namespace notepad
+
 The hackmd chart doesn't work out of the box on 1.16. You'll need to
 
 * Copy `values` out of `course.yaml`
