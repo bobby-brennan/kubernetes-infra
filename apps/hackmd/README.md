@@ -17,8 +17,9 @@ reckoner plot ./apps/hackmd/course.yaml
 The hackmd chart doesn't work out of the box on 1.16. You'll need to
 
 * Copy `values` out of `course.yaml`
-* `helm template hackmd stable/hackmd -f values.yaml > deploy-hackmd.yaml`
-* edit `deploy-hackmd.yaml`
+* fill out env variables
+* `helm template hackmd stable/hackmd -f values.yaml > hackmd.yaml`
+* edit `hackmd.yaml`
   * on the Postgresql Deployment:
     * change `extensions/v1beta1` to `apps/v1`
     * change spec to look like:
@@ -27,14 +28,16 @@ spec:
   replicas: 1
   selector:
     matchLabels:
-      app: hackmd
-      release: hackmd
+      app: hackmd-postgresql
+      release: hackmd-postgresql
   strategy:
     type: RollingUpdate
   template:
     metadata:
       labels:
-        app: hackmd
-        release: hackmd
+        app: hackmd-postgresql
+        release: hackmd-postgresql
+    spec: // original spec
 ```
-* `k apply -f deploy-hackmd.yaml -n hackmd`
+* change the selector on the svc to `app: hackmd-postgresql`
+* `k apply -f hackmd.yaml -n hackmd`
