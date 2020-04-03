@@ -1,13 +1,8 @@
-## Backup and Restore
+## Installation
 
+For backup and restore to work, Photon must be installed.
 ```bash
-reckoner plot ./apps/hackmd/course.yaml
-# make some changes in HackMD UI
-k apply -f ./apps/hackmd/backup.yaml
-# make more changes in HackMD UI
-k apply -f ./apps/hackmd/restore.yaml
-helm delete hackmd
-# uncomment persistence lines in course.yaml
+k apply -f ./apps/hackmd/snapshotgroup.yaml
 reckoner plot ./apps/hackmd/course.yaml
 ```
 

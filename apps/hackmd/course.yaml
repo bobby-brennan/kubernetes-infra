@@ -10,10 +10,10 @@ charts:
     values:
       postgresql:
         postgresqlPassword: $HACKMD_POSTGRES_PASSWORD
-        #persistence:
-          #existingClaim: restore-hackmd-postgresql
-      #persistence:
-        #existingClaim: restore-hackmd
+        persistence:
+          existingClaim: hackmd-postgresql
+      persistence:
+        existingClaim: hackmd
       ingress:
         enabled: true
         hosts:
@@ -27,4 +27,3 @@ charts:
         - kubectl annotate ing hackmd -n notepad --overwrite "kubernetes.io/ingress.class=nginx"
         - kubectl annotate ing hackmd -n notepad --overwrite "certmanager.k8s.io/cluster-issuer=letsencrypt-prod"
         - kubectl annotate ing hackmd -n notepad --overwrite "kubernetes.io/tls-acme=true"
-        - ../../scripts/retain.sh
