@@ -36,6 +36,8 @@ Setup takes a few steps:
 * Point your domain to the managed load balancer
 * Install apps!
 
+## Setup
+
 #### Dependencies
 
 I use [Helm](https://github.com/helm/helm) and [Reckoner](https://github.com/FairwindsOps/reckoner) to manage applications
@@ -47,8 +49,6 @@ rm -rf linux-amd64
 
 python3 -m pip install reckoner
 ```
-
-## Setup
 
 ### Create the Cluster
 
