@@ -1,0 +1,19 @@
+apiVersion: photon.fairwinds.com/v1
+kind: SnapshotGroup
+metadata:
+  name: lychee
+spec:
+  claim:
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: {{ .Values.persistence.size }}
+  schedule:
+    - every: day
+      keep: 1
+    - every: week
+      keep: 4
+    - every: month
+      keep: 12

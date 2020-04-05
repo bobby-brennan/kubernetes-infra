@@ -1,0 +1,5 @@
+ingress:
+  enabled: true
+  host: photos.example.com
+persistence:
+  size: 48Gi

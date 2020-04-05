@@ -1,3 +1,4 @@
+{{- if .Values.ingress.enabled }}
 apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -10,7 +11,7 @@ metadata:
   namespace: lychee
 spec:
   rules:
-    - host: photos.rbren.io
+    - host: {{ .Values.ingress.host }}
       http:
         paths:
           - backend:
@@ -20,4 +21,5 @@ spec:
   tls:
   - secretName: tls-prod-cert
     hosts:
-    - photos.rbren.io
+    - {{ .Values.ingress.host }}
+{{- end }}
