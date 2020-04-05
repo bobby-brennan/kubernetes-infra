@@ -1,0 +1,46 @@
+apiVersion: photon.fairwinds.com/v1
+kind: SnapshotGroup
+metadata:
+  name: ghost-app
+  namespace: mc-blog
+spec:
+  claim:
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 4Gi
+  schedule:
+    - every: hour
+      keep: 1
+    - every: day
+      keep: 1
+    - every: week
+      keep: 1
+    - every: month
+      keep: 3
+---
+apiVersion: photon.fairwinds.com/v1
+kind: SnapshotGroup
+metadata:
+  name: ghost-mariadb
+  namespace: mc-blog
+spec:
+  claim:
+    spec:
+      accessModes:
+        - ReadWriteOnce
+      resources:
+        requests:
+          storage: 4Gi
+  schedule:
+    - every: hour
+      keep: 1
+    - every: day
+      keep: 1
+    - every: week
+      keep: 1
+    - every: month
+      keep: 3
+

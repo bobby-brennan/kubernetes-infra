@@ -1,8 +1,13 @@
-namespace: ghost
+namespace: mc-blog
+repositories:
+  rbrenfork:
+    git: git@github.com:rbren/charts.git
+    path: stable
 charts:
   ghost:
-    namespace: ghost
-    version: 9.1.4
+    namespace: mc-blog
+    repository: rbrenfork
+    version: rb/ghost
     values:
       ghostUsername: $GHOST_USERNAME
       ghostEmail: $GHOST_USERNAME
@@ -12,7 +17,8 @@ charts:
         type: ClusterIP
       ghostHost: $GHOST_HOST
       persistence:
-        path: /opt/local-path-provisioner
+        enabled: true
+        existingClaim: ghost-app
       mariadb:
         db:
           password: $GHOST_PASSWORD
@@ -20,6 +26,9 @@ charts:
           password: $GHOST_PASSWORD
         image:
           debug: true
+        master:
+          persistence:
+            existingClaim: ghost-mariadb
       ingress:
         enabled: true
         hosts:
@@ -31,7 +40,6 @@ charts:
           certmanager.k8s.io/cluster-issuer: letsencrypt-prod
           kubernetes.io/tls-acme: "true"
           nginx.ingress.kubernetes.io/proxy-body-size: 5m
-    hooks:
-      post_install:
-        - sleep 10
-        - ../../scripts/retain.sh
+          nginx.ingress.kubernetes.io/auth-type: basic
+          nginx.ingress.kubernetes.io/auth-secret: basic-auth
+          nginx.ingress.kubernetes.io/auth-realm: 'Authentication Required'
