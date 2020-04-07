@@ -1,4 +1,5 @@
 backup-logs.txt
+auth
 envs
 restore
 .envrc
