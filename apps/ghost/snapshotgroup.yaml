@@ -2,7 +2,6 @@ apiVersion: photon.fairwinds.com/v1
 kind: SnapshotGroup
 metadata:
   name: ghost-app
-  namespace: mc-blog
 spec:
   claim:
     spec:
@@ -25,7 +24,6 @@ apiVersion: photon.fairwinds.com/v1
 kind: SnapshotGroup
 metadata:
   name: ghost-mariadb
-  namespace: mc-blog
 spec:
   claim:
     spec:

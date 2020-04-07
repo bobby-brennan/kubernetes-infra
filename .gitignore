@@ -1,4 +1,5 @@
 backup-logs.txt
+envs
 restore
 .envrc
 *.kubeconfig*
