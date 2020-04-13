@@ -16,7 +16,7 @@ spec:
         spec:
           restartPolicy: OnFailure
           containers:
-          - name: hello
+          - name: stock-screener
             image: node:13.10
             command: ["bash"]
             args:
