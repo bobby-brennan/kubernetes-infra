@@ -17,13 +17,13 @@ spec:
           restartPolicy: OnFailure
           containers:
           - name: github-notif
-            image: node:13.10
+            image: ubuntu:18.04
             command: ["bash"]
             args:
             - -c
             - |
               last_min=$(date -u +"%Y-%m-%dT%H:%M:%SZ" --date="-1 minute")
-              apt-get update && apt-get install -y jq
+              apt-get update && apt-get install -y curl jq
               curl --fail -H "Authorization: Bearer $GITHUB_TOKEN" \
                   "https://api.github.com/notifications?since=$last_min" > notifs.json
               cat notifs.json
