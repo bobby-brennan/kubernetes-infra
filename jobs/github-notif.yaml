@@ -9,7 +9,7 @@ metadata:
   name: github-notifs
   namespace: github-notifs
 spec:
-  schedule: "* * * * *"
+  schedule: "*/10 * * * *"
   jobTemplate:
     spec:
       template:
@@ -22,7 +22,7 @@ spec:
             args:
             - -c
             - |
-              last_min=$(date -u +"%Y-%m-%dT%H:%M:%SZ" --date="-1 minute")
+              last_min=$(date -u +"%Y-%m-%dT%H:%M:%SZ" --date="-10 minute")
               apt-get update && apt-get install -y curl jq
               curl --fail -H "Authorization: Bearer $GITHUB_TOKEN" \
                   "https://api.github.com/notifications?since=$last_min" > notifs.json
@@ -34,7 +34,11 @@ spec:
                   echo "reason: $reason"
                   if [ $reason == "mention" ]; then
                     echo "$id    title: $title"
-                    payload=$(echo $json | jq '{text: (.subject.title + " - " + .subject.latest_comment_url)}' )
+                    title=$(echo $json | jq -r '.subject.title')
+                    api_url=$(echo $json | jq -r '.subject.latest_comment_url')
+                    json=$(curl --fail -H "Authorization: Bearer $GITHUB_TOKEN" $api_url)
+                    html_url=$(echo $json | jq -r '.html_url')
+                    payload="{\"text\": \"$title - $html_url\"}"
                     curl -X POST -H 'Content-type: application/json' \
                       --data "${payload}" "https://hooks.slack.com/services/$SLACK_WEBHOOK_ID"
                   else
