@@ -3,6 +3,7 @@ This is a list of open source consumer-grade applications that could be added to
 ## Community
 * Mastodon - https://github.com/Ladicle/mastodon-chart
 * Matomo - https://github.com/jptissot/matomo-chart
+* Plex - https://github.com/Unicorn-K8s/UnicornTrancoder-chart
 
 ## Without Helm Charts
 * https://selfhostedsource.tech/self-hosted/all
