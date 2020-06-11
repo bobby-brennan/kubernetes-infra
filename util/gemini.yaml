@@ -1,0 +1,13 @@
+namespace: default
+repositories:
+  gemini:
+    git: /home/rbren/git/go/src/github.com/fairwindsops/photon
+    path: deploy/charts/photon
+charts:
+  gemini:
+    namespace: gemini
+    repository: gemini
+    values:
+      image:
+        tag: 59e0ffe230bbfd4fd2c8f8a84125c475b6fd80ba
+        repository: quay.io/fairwinds/photon
