@@ -8,6 +8,7 @@ This is a list of open source consumer-grade applications that could be added to
 
 ## Without Helm Charts
 * https://selfhostedsource.tech/self-hosted/all
+* https://funkwhale.audio/en_US/
 
 ## Helm Hub
 * Factorio - a game https://hub.helm.sh/charts/stable/factorio
