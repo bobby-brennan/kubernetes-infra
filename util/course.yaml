@@ -12,13 +12,11 @@ charts:
         service:
           type: LoadBalancer
   cert-manager:
-    version: v0.11.0
+    version: v1.0.2
     namespace: cert-manager
     repository: jetstack
-    hooks:
-      pre_install:
-      - kubectl apply --validate=false -f https://raw.githubusercontent.com/jetstack/cert-manager/release-0.11/deploy/manifests/00-crds.yaml
     values:
+      installCRDs: true
       ingressShim:
         defaultIssuerName: letsencrypt-prod
         defaultIssuerKind: ClusterIssuer
