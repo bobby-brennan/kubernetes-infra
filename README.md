@@ -89,8 +89,10 @@ reckoner plot apps/ghost/course.yaml
 
 ### Lychee
 ```
-helm upgrade --install lychee charts/lychee/ --namespace lychee \
-  --set ingress.host=photos.example.com
+helm upgrade --install lychee-4 charts/lychee/ --namespace lychee-4 \
+  --set ingress.host=$LYCHEE_HOST \
+  --set mysql.root.password=$LYCHEE_DB_PASSWORD \
+  --set mysql.db.password=$LYCHEE_DB_PASSWORD
 ```
 
 ### rocketchat

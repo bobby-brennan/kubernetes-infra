@@ -2,4 +2,13 @@ ingress:
   enabled: true
   host: photos.example.com
 persistence:
-  size: 48Gi
+  size: 96Gi
+mysql:
+  db:
+    user: lychee
+    name: lychee
+    forcePassword: true
+  root:
+    forcePassword: true
+  replication:
+    enabled: false

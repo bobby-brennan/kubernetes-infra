@@ -1,8 +1,7 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: StatefulSet
 metadata:
   name: lychee
-  namespace: lychee
   labels:
     app: lychee
 spec:
@@ -10,40 +9,31 @@ spec:
   selector:
     matchLabels:
       app: lychee
+  serviceName: lychee
+  volumeClaimTemplates:
+  - metadata:
+      name: uploads
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: {{ .Values.persistence.size }}
   template:
     metadata:
       labels:
         app: lychee
     spec:
-      volumes:
-      - name: data
-        persistentVolumeClaim:
-          claimName: lychee
-      initContainers:
-      - name: permission-fix
-        image: busybox
-        command: ["/bin/sh"]
-        args:
-        - -c
-        - |
-          echo "Fixing permissions"
-          chmod -R 777 /data
-          mkdir -p /data/uploads/big
-          mkdir -p /data/uploads/medium
-          mkdir -p /data/uploads/thumb
-          chown www-data:www-data /data/uploads
-          chown www-data:www-data /data/uploads/big
-          chown www-data:www-data /data/uploads/medium
-          chown www-data:www-data /data/uploads/thumb
-        volumeMounts:
-        - name: data
-          mountPath: /data
+      terminationGracePeriodSeconds: 10
       containers:
-      - image: 'kdelfour/lychee-docker'
+      - image: 'lycheeorg/lychee'
         imagePullPolicy: 'Always'
         name: lychee
         ports:
         - containerPort: 80
+        volumeMounts:
+        - name: uploads
+          mountPath: "/uploads"
+          subPath: "uploads"
         resources:
           limits:
             cpu: 2000m
@@ -51,13 +41,30 @@ spec:
           requests:
             cpu: 100m
             memory: 128m
-        volumeMounts:
-        - name: data
-          mountPath: "/data"
-          subPath: "data"
-        - name: data
-          mountPath: "/uploads"
-          subPath: "uploads"
-        - name: data
-          mountPath: "/mysql"
-          subPath: "mysql"
+        readinessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 60
+          failureThreshold: 10
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 80
+          periodSeconds: 60
+          failureThreshold: 10
+        env:
+        - name: PHP_TZ
+          value: America/New_York
+        - name: DB_CONNECTION
+          value: mysql
+        - name: DB_DATABASE
+          value: lychee
+        - name: DB_USERNAME
+          value: root
+        - name: DB_PASSWORD
+          value: {{ .Values.mysql.db.password }}
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_HOST
+          value: {{ .Values.mysql.mysqlHost | default (printf "%s-%s" .Release.Name "mysql") }}
