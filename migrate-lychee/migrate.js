@@ -45,8 +45,9 @@ photos.forEach(photo => {
     fs.mkdirSync(dir);
   }
   outfile = dir + '/' + photo.title + '.jpg';
-  while (fs.existsSync(outfile)) {
-    outfile = dir + '/' + photo.title + '-' + randomID() + '.jpg';
+  if (fs.existsSync(outfile)) {
+    console.log('dupe');
+    return;
   }
   try {
     fs.renameSync('./uploads/big/' + photo.filename, outfile);
