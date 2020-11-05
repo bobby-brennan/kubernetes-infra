@@ -1,15 +1,10 @@
-apiVersion: photon.fairwinds.com/v1
+apiVersion: gemini.fairwinds.com/v1beta1
 kind: SnapshotGroup
 metadata:
   name: ghost-app
 spec:
-  claim:
-    spec:
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 4Gi
+  persistentVolumeClaim:
+    claimName: ghost-app
   schedule:
     - every: day
       keep: 1
@@ -18,18 +13,13 @@ spec:
     - every: month
       keep: 3
 ---
-apiVersion: photon.fairwinds.com/v1
+apiVersion: gemini.fairwinds.com/v1beta1
 kind: SnapshotGroup
 metadata:
   name: ghost-mariadb
 spec:
-  claim:
-    spec:
-      accessModes:
-        - ReadWriteOnce
-      resources:
-        requests:
-          storage: 4Gi
+  persistentVolumeClaim:
+    claimName: ghost-mariadb
   schedule:
     - every: day
       keep: 1

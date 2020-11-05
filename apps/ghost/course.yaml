@@ -1,7 +1,7 @@
 namespace: rbren-blog
 repositories:
   rbrenfork:
-    git: git@github.com:rbren/bitnami-charts.git
+    git: ~/git/bitnami-charts
     path: bitnami
 charts:
   ghost:
