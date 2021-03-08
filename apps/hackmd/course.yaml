@@ -1,24 +1,25 @@
 namespace: notepad
 charts:
-  hackmd:
+  codimd:
     namespace: notepad
+    repository: codimd
     values:
       postgresql:
         postgresqlPassword: $HACKMD_POSTGRES_PASSWORD
         persistence:
-          existingClaim: hackmd-postgresql
+          existingClaim: codimd-postgresql
       persistence:
-        existingClaim: hackmd
+        existingClaim: codimd
       ingress:
         enabled: true
         hosts:
-          - $HACKMD_HOST
+          - host: $HACKMD_HOST
+            paths: ['/']
         tls:
           - secretName: tls-prod-cert
             hosts:
               - $HACKMD_HOST
-    hooks:
-      post_install:
-        - kubectl annotate ing hackmd -n notepad --overwrite "kubernetes.io/ingress.class=nginx"
-        - kubectl annotate ing hackmd -n notepad --overwrite "certmanager.k8s.io/cluster-issuer=letsencrypt-prod"
-        - kubectl annotate ing hackmd -n notepad --overwrite "kubernetes.io/tls-acme=true"
+        annotations:
+          kubernetes.io/ingress.class: nginx
+          certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+          kubernetes.io/tls-acme: "true"
