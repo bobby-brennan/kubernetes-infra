@@ -37,6 +37,8 @@ charts:
     version: 5.6.0
     namespace: metrics-server
     values:
+      apiService:
+        create: true
       args:
       - "--kubelet-insecure-tls"
       - "--kubelet-preferred-address-types=InternalIP"
