@@ -25,7 +25,7 @@ spec:
     spec:
       terminationGracePeriodSeconds: 10
       containers:
-      - image: 'lycheeorg/lychee'
+      - image: 'lycheeorg/lychee:v4.0.8'
         imagePullPolicy: 'Always'
         name: lychee
         ports:
