@@ -39,7 +39,7 @@ charts:
     values:
       apiService:
         create: true
-      args:
+      extraArgs:
       - "--kubelet-insecure-tls"
       - "--kubelet-preferred-address-types=InternalIP"
       - "--metric-resolution=30s"
