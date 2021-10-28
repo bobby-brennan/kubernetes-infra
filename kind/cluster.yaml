@@ -11,9 +11,7 @@ kubeadmConfigPatches:
       "runtime-config": "apps/v1beta1=true,apps/v1beta2=true,extensions/v1beta1/daemonsets=true,extensions/v1beta1/deployments=true,extensions/v1beta1/replicasets=true,extensions/v1beta1/networkpolicies=true,extensions/v1beta1/podsecuritypolicies=true"
 nodes:
 - role: control-plane
-  image: kindest/node:v1.21.1@sha256:69860bda5563ac81e3c0057d654b5253219618a22ec3a346306239bba8cfa1a6
 - role: worker
-  image: kindest/node:v1.21.1@sha256:69860bda5563ac81e3c0057d654b5253219618a22ec3a346306239bba8cfa1a6
   extraMounts:
   - containerPath: /opt/local-path-provisioner
     hostPath: /home/ubuntu/kind-disk
