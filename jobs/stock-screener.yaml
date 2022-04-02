@@ -29,6 +29,7 @@ spec:
               cd stock-screener
               npm install
               ./refresh.sh
+              sed -i "s/<div class=.date.>.*<\/div>/<div class='date'>`TZ=America/New_York date`<\/div>/g" index.html
               git add .
               git commit -m "automated data refresh"
               git push
