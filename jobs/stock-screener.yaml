@@ -28,7 +28,7 @@ spec:
               git clone https://$GITHUB_TOKEN@github.com/rbren/stock-screener
               cd stock-screener
               npm install
-              node refresh.js
+              ./refresh.sh
               git add .
               git commit -m "automated data refresh"
               git push
@@ -38,5 +38,10 @@ spec:
                 secretKeyRef:
                   name: github-token
                   key: github-token
+            - name: POLYGON_API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: polygon-token
+                  key: polygon-token
 
 
