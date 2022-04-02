@@ -1,0 +1,30 @@
+apiVersion: gemini.fairwinds.com/v1beta1
+kind: SnapshotGroup
+metadata:
+  name: budibase-minio
+spec:
+  persistentVolumeClaim:
+    claimName: minio-data
+  schedule:
+    - every: day
+      keep: 1
+    - every: week
+      keep: 1
+    - every: month
+      keep: 3
+---
+apiVersion: gemini.fairwinds.com/v1beta1
+kind: SnapshotGroup
+metadata:
+  name: budibase-redis
+spec:
+  persistentVolumeClaim:
+    claimName: redis-data
+  schedule:
+    - every: day
+      keep: 1
+    - every: week
+      keep: 1
+    - every: month
+      keep: 3
+
