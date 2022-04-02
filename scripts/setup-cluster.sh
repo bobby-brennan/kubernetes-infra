@@ -1,7 +1,7 @@
 #!/bin/bash
 set -e
 
-reckoner plot util/course.yaml
+reckoner plot util/course.yaml --run-all
 
 sleep 30
 
