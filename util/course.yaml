@@ -17,7 +17,7 @@ charts:
         service:
           type: LoadBalancer
   cert-manager:
-    version: v1.0.2
+    version: v1.8.0
     namespace: cert-manager
     repository: jetstack
     values:
