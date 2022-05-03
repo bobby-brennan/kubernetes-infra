@@ -89,10 +89,11 @@ reckoner plot apps/ghost/course.yaml
 
 ### Lychee
 ```
-helm upgrade --install lychee-4 charts/lychee/ --namespace lychee-4 \
+helm upgrade --install lychee-server charts/lychee/ --namespace pics \
   --set ingress.host=$LYCHEE_HOST \
   --set mysql.root.password=$LYCHEE_DB_PASSWORD \
-  --set mysql.db.password=$LYCHEE_DB_PASSWORD
+  --set mysql.db.password=$LYCHEE_DB_PASSWORD \
+  --set nodeName=$LYCHEE_NODE_NAME # FIXME: currently need this due to the statefulset putting the pod on the wrong node
 ```
 
 ### rocketchat
