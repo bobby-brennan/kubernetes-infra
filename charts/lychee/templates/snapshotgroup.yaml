@@ -9,9 +9,9 @@ spec:
     - every: day
       keep: 1
     - every: week
-      keep: 4
+      keep: 1
     - every: month
-      keep: 12
+      keep: 1
 ---
 apiVersion: gemini.fairwinds.com/v1beta1
 kind: SnapshotGroup
@@ -24,6 +24,6 @@ spec:
     - every: day
       keep: 1
     - every: week
-      keep: 4
+      keep: 1
     - every: month
-      keep: 12
+      keep: 1
