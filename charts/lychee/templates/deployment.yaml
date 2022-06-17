@@ -23,9 +23,6 @@ spec:
       labels:
         app: lychee
     spec:
-      {{ with .Values.nodeName }}
-      nodeName: {{ . }}
-      {{ end }}
       terminationGracePeriodSeconds: 10
       containers:
       - image: 'lycheeorg/lychee:v4.4.0'
