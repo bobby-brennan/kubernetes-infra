@@ -45,11 +45,13 @@ echo Using kind to create Kube ${kube_version} cluster with image ${image}. . .
 
 kind create cluster --config kind/cluster.yaml --image ${image} $@
 
-kubectl apply -f kind/local-path-storage.yaml
-kubectl patch storageclass standard -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"false", "storageclass.beta.kubernetes.io/is-default-class":"false"}}}'
-kubectl patch storageclass local-path -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true", "storageclass.beta.kubernetes.io/is-default-class":"true"}}}'
+if ping host.docker.internal -c 1; then
+  echo "changing KUBECONFIG to point to parent's docker host"
+  sed -i 's/127.0.0.1/host.docker.internal/g' $KUBECONFIG
+fi
 
-sleep 60
+echo "created cluster, waiting for warmup"
+sleep 30
 
 ./scripts/setup-cluster.sh
 
