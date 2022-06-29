@@ -7,11 +7,10 @@ kubeadmConfigPatches:
   metadata:
     name: config
   apiServer:
+    certSANs:
+    - host.docker.internal
     extraArgs:
       "runtime-config": "apps/v1beta1=true,apps/v1beta2=true,extensions/v1beta1/daemonsets=true,extensions/v1beta1/deployments=true,extensions/v1beta1/replicasets=true,extensions/v1beta1/networkpolicies=true,extensions/v1beta1/podsecuritypolicies=true"
 nodes:
 - role: control-plane
 - role: worker
-  extraMounts:
-  - containerPath: /opt/local-path-provisioner
-    hostPath: /home/ubuntu/kind-disk
