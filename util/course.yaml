@@ -40,5 +40,5 @@ charts:
       apiService:
         create: true
       extraArgs:
-      - "kubelet-insecure-tls=true"
-      - "kubelet-preferred-address-types=InternalIP"
+      - "--kubelet-insecure-tls=true"
+      - "--kubelet-preferred-address-types=InternalIP"
