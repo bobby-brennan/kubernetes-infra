@@ -9,6 +9,9 @@ if [ "x${kube_version}" == "x" ] ; then
   exit 1
 fi
 case "${kube_version}" in
+  1.25)
+    image='kindest/node:v1.25.3@sha256:f52781bc0d7a19fb6c405c2af83abfeb311f130707a0e219175677e366cc45d1'
+  ;;
   1.24)
     image='kindest/node:v1.24.0@sha256:0866296e693efe1fed79d5e6c7af8df71fc73ae45e3679af05342239cdc5bc8e'
   ;;
