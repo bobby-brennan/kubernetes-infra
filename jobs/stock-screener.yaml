@@ -3,7 +3,7 @@ kind: Namespace
 metadata:
   name: stock-screener
 ---
-apiVersion: batch/v1beta1
+apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: stock-screener-refresh

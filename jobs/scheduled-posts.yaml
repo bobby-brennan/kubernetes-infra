@@ -1,0 +1,82 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: post-scheduler
+---
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: post-scheduler
+  namespace: post-scheduler
+spec:
+  schedule: "42 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          restartPolicy: Never
+          volumes:
+          - name: google-secret
+            secret:
+              secretName: google-secret
+          containers:
+          - name: post-scheduler
+            image: python:3.11-buster
+            command: ["bash"]
+            volumeMounts:
+            - name: google-secret
+              mountPath: "/etc/google-secret"
+              readOnly: true
+            args:
+            - -c
+            - |
+              echo "Cloning post-scheduler"
+              git clone --depth=1 https://$GITHUB_TOKEN@github.com/rbren/post-scheduler
+              cd post-scheduler
+              python -m pip install -r requirements.txt
+              echo "Running post-scheduler"
+              python main.py
+            env:
+            - name: SPREADSHEET_ID
+              value: "1sAbUnHFwr3i14BdcpgiMRliiLTFqqp2Wwhnppd2Tkms"
+            - name: GOOGLE_SECRET_FILE
+              value: "/etc/google-secret/google-credentials.json"
+            - name: GITHUB_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: github-token
+                  key: github-token
+
+            # HN
+            - name: HN_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: hacker-news
+                  key: HN_USERNAME
+            - name: HN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: hacker-news
+                  key: HN_PASSWORD
+
+            # Reddit
+            - name: REDDIT_CLIENT_ID
+              valueFrom:
+                secretKeyRef:
+                  name: reddit
+                  key: REDDIT_CLIENT_ID
+            - name: REDDIT_CLIENT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: reddit
+                  key: REDDIT_CLIENT_SECRET
+            - name: REDDIT_USERNAME
+              valueFrom:
+                secretKeyRef:
+                  name: reddit
+                  key: REDDIT_USERNAME
+            - name: REDDIT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: reddit
+                  key: REDDIT_PASSWORD
