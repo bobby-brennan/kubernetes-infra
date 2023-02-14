@@ -9,7 +9,7 @@ metadata:
   name: post-scheduler
   namespace: post-scheduler
 spec:
-  schedule: "42 * * * *"
+  schedule: "12,27,42,57 * * * *"
   jobTemplate:
     spec:
       template:
