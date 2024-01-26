@@ -36,3 +36,4 @@ This is a list of open source consumer-grade applications that could be added to
 * yourls - url shortener https://hub.helm.sh/charts/yourls/yourls
 * zammad - helpdesk, customer support https://hub.helm.sh/charts/zammad/zammad
 * zeppelin - data driven notebooks https://hub.helm.sh/charts/stable/zeppelin
+* home assistant - home automation https://artifacthub.io/packages/helm/k8s-home-lab-repo/home-assistant
