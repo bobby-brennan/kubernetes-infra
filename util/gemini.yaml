@@ -7,3 +7,6 @@ charts:
     namespace: gemini
     repository: fairwinds
     version: 1.0.0
+    values:
+      image:
+        tag: rb-snapshotgroup-v1
