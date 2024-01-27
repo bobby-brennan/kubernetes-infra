@@ -1,0 +1,31 @@
+namespace: vizzy
+repositories:
+  vizzy:
+    git: ~/git/llm-data-viz
+    path: ""
+charts:
+  chart:
+    namespace: vizzy
+    repository: vizzy
+    version: main
+    values:
+      deployment:
+        env:
+        - name: STORAGE_STRATEGY
+          value: s3
+        - name: S3_BUCKET
+          value: "$VIZZY_S3_BUCKET"
+        - name: AWS_REGION
+          value: "$VIZZY_AWS_REGION"
+        - name: AWS_ACCESS_KEY_ID
+          value: "$VIZZY_AWS_ACCESS_KEY_ID"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "$VIZZY_AWS_SECRET_ACCESS_KEY"
+      ingress:
+        enabled: true
+        host: $VIZZY_HOST
+        className: nginx
+        annotations:
+          certmanager.k8s.io/cluster-issuer: letsencrypt-prod
+          kubernetes.io/tls-acme: "true"
+          nginx.ingress.kubernetes.io/proxy-body-size: "100m"
