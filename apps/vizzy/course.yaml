@@ -1,7 +1,7 @@
 namespace: vizzy
 repositories:
   vizzy:
-    git: ~/git/llm-data-viz
+    git: https://github.com/rbren/vizzy
     path: ""
 charts:
   chart:

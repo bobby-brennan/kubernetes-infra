@@ -1,0 +1,30 @@
+namespace: llm-headlines
+repositories:
+  llm-headlines:
+    git: ~/git/llm-headlines
+    path: ""
+charts:
+  chart:
+    namespace: llm-headlines
+    repository: llm-headlines
+    version: main
+    values:
+      cronjob:
+        env:
+        - name: AWS_REGION
+          value: "$LLM_HEADLINES_AWS_REGION"
+        - name: AWS_ACCESS_KEY_ID
+          value: "$LLM_HEADLINES_AWS_ACCESS_KEY_ID"
+        - name: AWS_SECRET_ACCESS_KEY
+          value: "$LLM_HEADLINES_AWS_SECRET_ACCESS_KEY"
+        - name: AWS_EMAIL_SENDER
+          value: "$LLM_HEADLINES_AWS_EMAIL_SENDER"
+        - name: EMAIL_RECIPIENT
+          value: "$LLM_HEADLINES_EMAIL_RECIPIENT"
+        - name: USER_PREFERENCES
+          value: "$LLM_HEADLINES_USER_PREFERENCES"
+        - name: OPENAI_API_KEY
+          value: "$LLM_HEADLINES_OPENAI_API_KEY"
+        - name: OPENAI_MODEL
+          value: "$LLM_HEADLINES_OPENAI_MODEL"
+
