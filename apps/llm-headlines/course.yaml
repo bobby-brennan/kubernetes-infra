@@ -27,4 +27,8 @@ charts:
           value: "$LLM_HEADLINES_OPENAI_API_KEY"
         - name: OPENAI_MODEL
           value: "$LLM_HEADLINES_OPENAI_MODEL"
+        - name: S3_BUCKET
+          value: "llm-headlines"
+        - name: STORAGE_STRATEGY
+          value: "s3"
 
